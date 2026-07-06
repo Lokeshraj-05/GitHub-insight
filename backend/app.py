@@ -14,7 +14,7 @@ app = FastAPI()
 
 
 @app.get("/analyze/{username}")
-def analyze(username):
+def analyze(username: str):
 
     profile = get_profile(username)
 
@@ -31,14 +31,11 @@ def analyze(username):
 
         result.append({
 
-            "repo":
-            repo["name"],
+            "repo": repo["name"],
 
-            "type":
-            classify_repo(repo),
+            "type": classify_repo(repo),
 
-            "analysis":
-            analyze_project(
+            "analysis": analyze_project(
                 repo,
                 readme
             )
@@ -46,11 +43,11 @@ def analyze(username):
 
     return {
         "profile":
-        analyze_profile(
-            profile,
-            repos
-        ),
+            analyze_profile(
+                profile,
+                repos
+            ),
 
         "repositories":
-        result
+            result
     }
